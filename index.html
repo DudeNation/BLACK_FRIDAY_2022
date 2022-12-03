@@ -110,6 +110,105 @@
     </div>
   </section>
 
+  <div class="modal" id="SearchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="cross" data-bs-dismiss="modal" aria-label="Close">
+          <svg class="svg-inline--fa fa-times fa-w-11" aria-hidden="true" focusable="false" data-prefix="fas"
+            data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" data-fa-i2svg="">
+            <path fill="currentColor"
+              d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+            </path>
+          </svg>
+        </div>
+        <div class="modal-body form-container">
+          <input type="text" placeholder="Input Your Search" name="name">
+          <button type="submit">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end " data-bs-scroll="true" tabindex="-1" id="offcanvasExample"
+    data-bs-keyboard="false" data-bs-backdrop="true" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <img src="https://template.labartisan.net/demos/blackfriday/assets/images/logo/logo.png" alt="logo">
+      <button type="button" class="btn-close-canvas text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+        <svg class="svg-inline--fa fa-times fa-w-11" aria-hidden="true" focusable="false" data-prefix="fas"
+          data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" data-fa-i2svg="">
+          <path fill="#fff"
+            d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="bottom-content">
+        <div class="cart-products">
+          <h4 class="title">Shopping cart</h4>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="	https://template.labartisan.net/demos/blackfriday/assets/images/product/01.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Color Pencil</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/02.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Water Pot</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/03.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Art Paper</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/04.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Stop Watch</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/05.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Comics Book</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="btn-wrapper text-center" style="margin-top: 30px;">
+            <a href="#" class="default-btn shop-btn checkout-btn"><span>Checkout</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <section class="offer-section padding--top padding--bottom">
     <div class="container ani-section">
       <div class="offer">
