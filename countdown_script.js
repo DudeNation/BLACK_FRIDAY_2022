@@ -1,5 +1,5 @@
 const countDownDate1 = new Date("Feb 22, 2023 21:13:59").getTime();
-const countDownDate2 = new Date("Nov 26, 2022 21:13:59").getTime();
+const countDownDate2 = new Date("Dec 10, 2022 21:13:59").getTime();
 
 const x = setInterval(function () {
   const now = new Date().getTime();
