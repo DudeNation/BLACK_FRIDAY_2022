@@ -13,21 +13,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.js"
+    integrity="sha512-CX7sDOp7UTAq+i1FYIlf9Uo27x4os+kGeoT7rgwvY+4dmjqV0IuE/Bl5hVsjnQPQiTOhAX1O2r2j5bjsFBvv/A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="./confetti_script.js" defer></script>
   <script src="./countdown_script.js" defer></script>
   <script src="./script.js" defer></script>
   <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./product.css">
   <title>Back Friday Sales</title>
 </head>
 
 <body>
   <section>
-    <canvas id="canvas"></canvas>
+    <!-- <canvas id="canvas"></canvas> -->
 
     <div class="header">
-      <div class="container">
-        <div class="navbar navbar-expand-lg">
+      <div class="navbar fixed-top  navbar-expand-lg">
+        <div class="container">
           <a href="/#" class="navbar-brand">
             <img src="https://template.labartisan.net/demos/blackfriday/assets/images/logo/logo.png" alt="Sannto">
           </a>
@@ -45,7 +47,7 @@
               <a class="nav-link" href="#contact">Contact</a>
             </div>
             <div class="search-cart-area d-flex flex-wrap align-items-center ms-4">
-              <div class="search-icon me-4">
+              <div class="search-icon me-4" data-bs-toggle="modal" data-bs-target="#SearchModal">
                 <svg class="svg-inline--fa fa-search fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas"
                   data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
                   data-fa-i2svg="">
@@ -54,13 +56,26 @@
                     data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
                 </svg>
               </div>
-              <div class="cart-icon">
+              <div class="cart-icon" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                aria-controls="offcanvasExample">
                 <svg class="svg-inline--fa fa-shopping-bag fa-w-14" aria-hidden="true" focusable="false"
                   data-prefix="fas" data-icon="shopping-bag" role="img" xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 448 512" data-fa-i2svg="">
                   <path fill="#fff"
                     d="M352 160v-32C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128v32H0v272c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V160h-96zm-192-32c0-35.29 28.71-64 64-64s64 28.71 64 64v32H160v-32zm160 120c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zm-192 0c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24z"
                     data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                </svg>
+              </div>
+              <div id="close-modal-btn" class="hide" onclick="closeModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                  id="Capa_1" x="0px" y="0px" viewBox="0 0 252 252" style="enable-background:new 0 0 252 252;"
+                  xml:space="preserve">
+                  <g>
+                    <path fill="#fff"
+                      d="M126,0C56.523,0,0,56.523,0,126s56.523,126,126,126s126-56.523,126-126S195.477,0,126,0z M126,234   c-59.551,0-108-48.449-108-108S66.449,18,126,18s108,48.449,108,108S185.551,234,126,234z" />
+                    <path fill="#fff"
+                      d="M164.612,87.388c-3.515-3.515-9.213-3.515-12.728,0L126,113.272l-25.885-25.885c-3.515-3.515-9.213-3.515-12.728,0   c-3.515,3.515-3.515,9.213,0,12.728L113.272,126l-25.885,25.885c-3.515,3.515-3.515,9.213,0,12.728   c1.757,1.757,4.061,2.636,6.364,2.636s4.606-0.879,6.364-2.636L126,138.728l25.885,25.885c1.757,1.757,4.061,2.636,6.364,2.636   s4.606-0.879,6.364-2.636c3.515-3.515,3.515-9.213,0-12.728L138.728,126l25.885-25.885   C168.127,96.601,168.127,90.902,164.612,87.388z" />
+                  </g>
                 </svg>
               </div>
             </div>
@@ -110,6 +125,105 @@
     </div>
   </section>
 
+  <div class="modal" id="SearchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="cross" data-bs-dismiss="modal" aria-label="Close">
+          <svg class="svg-inline--fa fa-times fa-w-11" aria-hidden="true" focusable="false" data-prefix="fas"
+            data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" data-fa-i2svg="">
+            <path fill="currentColor"
+              d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+            </path>
+          </svg>
+        </div>
+        <div class="modal-body form-container">
+          <input type="text" placeholder="Input Your Search" name="name">
+          <button type="submit">Search</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end " data-bs-scroll="true" tabindex="-1" id="offcanvasExample"
+    data-bs-keyboard="false" data-bs-backdrop="true" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <img src="https://template.labartisan.net/demos/blackfriday/assets/images/logo/logo.png" alt="logo">
+      <button type="button" class="btn-close-canvas text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+        <svg class="svg-inline--fa fa-times fa-w-11" aria-hidden="true" focusable="false" data-prefix="fas"
+          data-icon="times" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512" data-fa-i2svg="">
+          <path fill="#fff"
+            d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="bottom-content">
+        <div class="cart-products">
+          <h4 class="title">Shopping cart</h4>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="	https://template.labartisan.net/demos/blackfriday/assets/images/product/01.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Color Pencil</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/02.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Water Pot</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/03.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Art Paper</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/04.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Stop Watch</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="single-product-item">
+            <div class="thumb">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/05.jpg"
+                alt="blackfriday">
+            </div>
+            <div class="content">
+              <h4 class="title">Comics Book</h4>
+              <div class="price"><span class="pprice">$80.00</span> <del class="dprice">$120.00</del></div>
+              <a href="#" class="remove-cart">Remove</a>
+            </div>
+          </div>
+          <div class="btn-wrapper text-center" style="margin-top: 30px;">
+            <a href="#" class="default-btn shop-btn checkout-btn"><span>Checkout</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <section class="offer-section padding--top padding--bottom">
     <div class="container ani-section">
       <div class="offer">
@@ -139,96 +253,886 @@
     </div>
   </section>
 
-  <div id="product" class="products-section">
-    <div class="container"> 
-        <div class="products-section-title">
-            Black Friday
-            <img src="https://template.labartisan.net/demos/blackfriday/assets/images/title-shape/sale.png" alt="blackfriday">
+  <section class="mt-5">
+    <div class="container ani-section">
+      <div class="section-header mb-5 text-center d-flex justify-content-center align-items-center"
+        data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+        <h2 class="pt-4 pe-3 fs-1" style="color: #fff;">Black Friday</h2>
+        <img src="https://template.labartisan.net/demos/blackfriday/assets/images/title-shape/sale.png"
+          alt="blackfriday" class="mt-30-none">
+      </div>
+      <div class="section-wrapper">
+        <div class="product">
+          <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 justify-content-center g-4">
+            <div class="col" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+              <div class="product__item text-center">
+                <div class="product__item--thumb">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/01.jpg"
+                    alt="blackfriday">
+                </div>
+                <div class="product__item--content py-4">
+                  <a href="#">
+                    <h6>Blue Headphones </h6>
+                  </a>
+                  <h6>$380.00</h6>
+                  <div class="rating mb-4">
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                  </div>
+                  <a href="#" class="default-btn border-btn"><span>Shop Now</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="col" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+              <div class="product__item text-center">
+                <div class="product__item--thumb">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/02.jpg"
+                    alt="blackfriday">
+                </div>
+                <div class="product__item--content py-4">
+                  <a href="#">
+                    <h6>Mobile Powerbank</h6>
+                  </a>
+                  <h6>$380.00</h6>
+                  <div class="rating mb-4">
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                  </div>
+                  <a href="#" class="default-btn border-btn"><span>Shop Now</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="col" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+              <div class="product__item text-center">
+                <div class="product__item--thumb">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/03.jpg"
+                    alt="blackfriday">
+                </div>
+                <div class="product__item--content py-4">
+                  <a href="#">
+                    <h6>Nikon D800 Camera</h6>
+                  </a>
+                  <h6>$380.00</h6>
+                  <div class="rating mb-4">
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                  </div>
+                  <a href="#" class="default-btn border-btn"><span>Shop Now</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="col" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+              <div class="product__item text-center">
+                <div class="product__item--thumb">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/04.jpg"
+                    alt="blackfriday">
+                </div>
+                <div class="product__item--content py-4">
+                  <a href="#">
+                    <h6>VR Box Glasses</h6>
+                  </a>
+                  <h6>$380.00</h6>
+                  <div class="rating mb-4">
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                  </div>
+                  <a href="#" class="default-btn border-btn"><span>Shop Now</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="products-list">
-            <div class="product-item">
-                <div class="product-item--image">
-                    <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/01.jpg" alt="blackfriday">
-                </div>
-                <div class="product-item--desc">
-                    <a href="#">
-                        <h6 class="product-name"> BLUE HEADPHONES </h6>
-                        <h6> $380.00 </h6>
-                    </a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <a href="#" class="buy-btn"><span>SHOP NOW</span></a>
-                </div>
+  <section id="product" class="feature-section padding--bottom padding--top overflow-hidden">
+    <div class="container  ani-section">
+      <div class="feature">
+        <div class="row justify-content-center g-5">
+          <div class="col-lg-6 col-12">
+            <div class="feature__thumb wow fadeInLeft" data-wow-duration="0.5s"
+              style="visibility: visible; animation-duration: 0.5s; animation-name: fadeInLeft;">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/feature/01.jpg"
+                alt="blackfriday" class="w-100">
             </div>
-
-            <div class="product-item">
-                <div class="product-item--image">
-                    <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/02.jpg" alt="blackfriday">
-                </div>
-                <div class="product-item--desc">
-                    <a href="#">
-                        <h6 class="product-name">MOBILE POWERBANK </h6>
-                        <h6> $380.00 </h6>
-                    </a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="feature__content ps-lg-4">
+              <div class="feature__content--title">
+                <h3 class="wow fadeInUp" data-wow-duration="0.5s"
+                  style="visibility: visible; animation-duration: 0.5s;">VR Product <img
+                    src="https://template.labartisan.net/demos/blackfriday/assets/images/title-shape/feature.png"
+                    alt="blackfriday" class="mt-30-none"></h3>
+                <p class="wow fadeInUp" data-wow-duration="0.6s" style="visibility: visible; animation-duration: 0.6s;">
+                  Don't get shirty with
+                  me owt to do with me arse down the pub have it car boot happy days no biggie bevriy only aquid Im
+                  goods in my flat the little rotter cheeky.!</p>
+              </div>
+              <div class="feature__content--content">
+                <ul>
+                  <li class="wow fadeInUp" data-wow-duration="0.7s"
+                    style="visibility: visible; animation-duration: 0.7s;">
+                    <div class="feature__content--left">
+                      <svg class="svg-inline--fa fa-volume-up fa-w-18" aria-hidden="true" focusable="false"
+                        data-prefix="fas" data-icon="volume-up" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                          d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95-7.34 11.17-4.22 26.18 6.95 33.51 66.27 43.49 105.82 116.6 105.82 195.58 0 78.98-39.55 152.09-105.82 195.58-11.17 7.32-14.29 22.34-6.95 33.5 7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36 6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81-11.61 6.41-15.84 21-9.45 32.61 6.43 11.66 21.05 15.8 32.61 9.45 28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z">
+                        </path>
+                      </svg>
                     </div>
-                    <a href="#" class="buy-btn"><span>SHOP NOW</span></a>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <div class="product-item--image">
-                    <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/03.jpg" alt="blackfriday">
-                </div>
-                <div class="product-item--desc">
-                    <a href="#">
-                        <h6 class="product-name">NIKON D800 CAMERA </h6>
-                        <h6> $380.00 </h6>
-                    </a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                    <div class="feature__content--right">
+                      <h5>Perfect Sound</h5>
+                      <p>For business which a product online product listings in the</p>
                     </div>
-                    <a href="#" class="buy-btn"><span>SHOP NOW</span></a>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <div class="product-item--image">
-                    <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/04.jpg" alt="blackfriday">
-                </div>
-                <div class="product-item--desc">
-                    <a href="#">
-                        <h6 class="product-name">VR BOX GLASSES </h6>
-                        <h6> $380.00 </h6>
-                    </a>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
+                  </li>
+                  <li class="wow fadeInUp" data-wow-duration="0.7s"
+                    style="visibility: visible; animation-duration: 0.7s;">
+                    <div class="feature__content--left">
+                      <svg class="svg-inline--fa fa-soundcloud fa-w-20" aria-hidden="true" focusable="false"
+                        data-prefix="fab" data-icon="soundcloud" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                          d="M111.4 256.3l5.8 65-5.8 68.3c-.3 2.5-2.2 4.4-4.4 4.4s-4.2-1.9-4.2-4.4l-5.6-68.3 5.6-65c0-2.2 1.9-4.2 4.2-4.2 2.2 0 4.1 2 4.4 4.2zm21.4-45.6c-2.8 0-4.7 2.2-5 5l-5 105.6 5 68.3c.3 2.8 2.2 5 5 5 2.5 0 4.7-2.2 4.7-5l5.8-68.3-5.8-105.6c0-2.8-2.2-5-4.7-5zm25.5-24.1c-3.1 0-5.3 2.2-5.6 5.3l-4.4 130 4.4 67.8c.3 3.1 2.5 5.3 5.6 5.3 2.8 0 5.3-2.2 5.3-5.3l5.3-67.8-5.3-130c0-3.1-2.5-5.3-5.3-5.3zM7.2 283.2c-1.4 0-2.2 1.1-2.5 2.5L0 321.3l4.7 35c.3 1.4 1.1 2.5 2.5 2.5s2.2-1.1 2.5-2.5l5.6-35-5.6-35.6c-.3-1.4-1.1-2.5-2.5-2.5zm23.6-21.9c-1.4 0-2.5 1.1-2.5 2.5l-6.4 57.5 6.4 56.1c0 1.7 1.1 2.8 2.5 2.8s2.5-1.1 2.8-2.5l7.2-56.4-7.2-57.5c-.3-1.4-1.4-2.5-2.8-2.5zm25.3-11.4c-1.7 0-3.1 1.4-3.3 3.3L47 321.3l5.8 65.8c.3 1.7 1.7 3.1 3.3 3.1 1.7 0 3.1-1.4 3.1-3.1l6.9-65.8-6.9-68.1c0-1.9-1.4-3.3-3.1-3.3zm25.3-2.2c-1.9 0-3.6 1.4-3.6 3.6l-5.8 70 5.8 67.8c0 2.2 1.7 3.6 3.6 3.6s3.6-1.4 3.9-3.6l6.4-67.8-6.4-70c-.3-2.2-2-3.6-3.9-3.6zm241.4-110.9c-1.1-.8-2.8-1.4-4.2-1.4-2.2 0-4.2.8-5.6 1.9-1.9 1.7-3.1 4.2-3.3 6.7v.8l-3.3 176.7 1.7 32.5 1.7 31.7c.3 4.7 4.2 8.6 8.9 8.6s8.6-3.9 8.6-8.6l3.9-64.2-3.9-177.5c-.4-3-2-5.8-4.5-7.2zm-26.7 15.3c-1.4-.8-2.8-1.4-4.4-1.4s-3.1.6-4.4 1.4c-2.2 1.4-3.6 3.9-3.6 6.7l-.3 1.7-2.8 160.8s0 .3 3.1 65.6v.3c0 1.7.6 3.3 1.7 4.7 1.7 1.9 3.9 3.1 6.4 3.1 2.2 0 4.2-1.1 5.6-2.5 1.7-1.4 2.5-3.3 2.5-5.6l.3-6.7 3.1-58.6-3.3-162.8c-.3-2.8-1.7-5.3-3.9-6.7zm-111.4 22.5c-3.1 0-5.8 2.8-5.8 6.1l-4.4 140.6 4.4 67.2c.3 3.3 2.8 5.8 5.8 5.8 3.3 0 5.8-2.5 6.1-5.8l5-67.2-5-140.6c-.2-3.3-2.7-6.1-6.1-6.1zm376.7 62.8c-10.8 0-21.1 2.2-30.6 6.1-6.4-70.8-65.8-126.4-138.3-126.4-17.8 0-35 3.3-50.3 9.4-6.1 2.2-7.8 4.4-7.8 9.2v249.7c0 5 3.9 8.6 8.6 9.2h218.3c43.3 0 78.6-35 78.6-78.3.1-43.6-35.2-78.9-78.5-78.9zm-296.7-60.3c-4.2 0-7.5 3.3-7.8 7.8l-3.3 136.7 3.3 65.6c.3 4.2 3.6 7.5 7.8 7.5 4.2 0 7.5-3.3 7.5-7.5l3.9-65.6-3.9-136.7c-.3-4.5-3.3-7.8-7.5-7.8zm-53.6-7.8c-3.3 0-6.4 3.1-6.4 6.7l-3.9 145.3 3.9 66.9c.3 3.6 3.1 6.4 6.4 6.4 3.6 0 6.4-2.8 6.7-6.4l4.4-66.9-4.4-145.3c-.3-3.6-3.1-6.7-6.7-6.7zm26.7 3.4c-3.9 0-6.9 3.1-6.9 6.9L227 321.3l3.9 66.4c.3 3.9 3.1 6.9 6.9 6.9s6.9-3.1 6.9-6.9l4.2-66.4-4.2-141.7c0-3.9-3-6.9-6.9-6.9z">
+                        </path>
+                      </svg>
                     </div>
-                    <a href="#" class="buy-btn"><span>SHOP NOW</span></a>
-                </div>
+                    <div class="feature__content--right">
+                      <h5>Audio Recorder</h5>
+                      <p>For business which a product online product listings in the</p>
+                    </div>
+                  </li>
+                  <li class="wow fadeInUp" data-wow-duration="0.7s"
+                    style="visibility: visible; animation-duration: 0.7s;">
+                    <div class="feature__content--left">
+                      <svg class="svg-inline--fa fa-bluetooth-b fa-w-10" aria-hidden="true" focusable="false"
+                        data-prefix="fab" data-icon="bluetooth-b" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                          d="M196.48 260.023l92.626-103.333L143.125 0v206.33l-86.111-86.111-31.406 31.405 108.061 108.399L25.608 368.422l31.406 31.405 86.111-86.111L145.84 512l148.552-148.644-97.912-103.333zm40.86-102.996l-49.977 49.978-.338-100.295 50.315 50.317zM187.363 313.04l49.977 49.978-50.315 50.316.338-100.294z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="feature__content--right">
+                      <h5>Wifi Access</h5>
+                      <p>For business which a product online product listings in the</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="feature-section padding--bottom padding--top overflow-hidden">
+    <div class="container  ani-section">
+      <div class="feature">
+        <div class="row justify-content-center g-5">
+          <div class="col-lg-6 col-12">
+            <div class="feature__content ps-lg-4">
+              <div class="feature__content--title">
+                <h3 class="wow fadeInUp" data-wow-duration="0.5s"
+                  style="visibility: visible; animation-duration: 0.5s;">HeadPhone <img
+                    src="https://template.labartisan.net/demos/blackfriday/assets/images/title-shape/feature.png"
+                    alt="blackfriday" class="mt-30-none"></h3>
+                <p class="wow fadeInUp" data-wow-duration="0.6s" style="visibility: visible; animation-duration: 0.6s;">
+                  Don't get shirty with
+                  me owt to do with me arse down the pub have it car boot happy days no biggie bevriy only aquid Im
+                  goods in my flat the little rotter cheeky.!</p>
+              </div>
+              <div class="feature__content--content">
+                <ul>
+                  <li class="wow fadeInUp" data-wow-duration="0.7s"
+                    style="visibility: visible; animation-duration: 0.7s;">
+                    <div class="feature__content--left">
+                      <svg class="svg-inline--fa fa-volume-up fa-w-18" aria-hidden="true" focusable="false"
+                        data-prefix="fas" data-icon="volume-up" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                          d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95-7.34 11.17-4.22 26.18 6.95 33.51 66.27 43.49 105.82 116.6 105.82 195.58 0 78.98-39.55 152.09-105.82 195.58-11.17 7.32-14.29 22.34-6.95 33.5 7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36 6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81-11.61 6.41-15.84 21-9.45 32.61 6.43 11.66 21.05 15.8 32.61 9.45 28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="feature__content--right">
+                      <h5>Perfect Sound</h5>
+                      <p>For business which a product online product listings in the</p>
+                    </div>
+                  </li>
+                  <li class="wow fadeInUp" data-wow-duration="0.7s"
+                    style="visibility: visible; animation-duration: 0.7s;">
+                    <div class="feature__content--left">
+                      <svg class="svg-inline--fa fa-soundcloud fa-w-20" aria-hidden="true" focusable="false"
+                        data-prefix="fab" data-icon="soundcloud" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 640 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                          d="M111.4 256.3l5.8 65-5.8 68.3c-.3 2.5-2.2 4.4-4.4 4.4s-4.2-1.9-4.2-4.4l-5.6-68.3 5.6-65c0-2.2 1.9-4.2 4.2-4.2 2.2 0 4.1 2 4.4 4.2zm21.4-45.6c-2.8 0-4.7 2.2-5 5l-5 105.6 5 68.3c.3 2.8 2.2 5 5 5 2.5 0 4.7-2.2 4.7-5l5.8-68.3-5.8-105.6c0-2.8-2.2-5-4.7-5zm25.5-24.1c-3.1 0-5.3 2.2-5.6 5.3l-4.4 130 4.4 67.8c.3 3.1 2.5 5.3 5.6 5.3 2.8 0 5.3-2.2 5.3-5.3l5.3-67.8-5.3-130c0-3.1-2.5-5.3-5.3-5.3zM7.2 283.2c-1.4 0-2.2 1.1-2.5 2.5L0 321.3l4.7 35c.3 1.4 1.1 2.5 2.5 2.5s2.2-1.1 2.5-2.5l5.6-35-5.6-35.6c-.3-1.4-1.1-2.5-2.5-2.5zm23.6-21.9c-1.4 0-2.5 1.1-2.5 2.5l-6.4 57.5 6.4 56.1c0 1.7 1.1 2.8 2.5 2.8s2.5-1.1 2.8-2.5l7.2-56.4-7.2-57.5c-.3-1.4-1.4-2.5-2.8-2.5zm25.3-11.4c-1.7 0-3.1 1.4-3.3 3.3L47 321.3l5.8 65.8c.3 1.7 1.7 3.1 3.3 3.1 1.7 0 3.1-1.4 3.1-3.1l6.9-65.8-6.9-68.1c0-1.9-1.4-3.3-3.1-3.3zm25.3-2.2c-1.9 0-3.6 1.4-3.6 3.6l-5.8 70 5.8 67.8c0 2.2 1.7 3.6 3.6 3.6s3.6-1.4 3.9-3.6l6.4-67.8-6.4-70c-.3-2.2-2-3.6-3.9-3.6zm241.4-110.9c-1.1-.8-2.8-1.4-4.2-1.4-2.2 0-4.2.8-5.6 1.9-1.9 1.7-3.1 4.2-3.3 6.7v.8l-3.3 176.7 1.7 32.5 1.7 31.7c.3 4.7 4.2 8.6 8.9 8.6s8.6-3.9 8.6-8.6l3.9-64.2-3.9-177.5c-.4-3-2-5.8-4.5-7.2zm-26.7 15.3c-1.4-.8-2.8-1.4-4.4-1.4s-3.1.6-4.4 1.4c-2.2 1.4-3.6 3.9-3.6 6.7l-.3 1.7-2.8 160.8s0 .3 3.1 65.6v.3c0 1.7.6 3.3 1.7 4.7 1.7 1.9 3.9 3.1 6.4 3.1 2.2 0 4.2-1.1 5.6-2.5 1.7-1.4 2.5-3.3 2.5-5.6l.3-6.7 3.1-58.6-3.3-162.8c-.3-2.8-1.7-5.3-3.9-6.7zm-111.4 22.5c-3.1 0-5.8 2.8-5.8 6.1l-4.4 140.6 4.4 67.2c.3 3.3 2.8 5.8 5.8 5.8 3.3 0 5.8-2.5 6.1-5.8l5-67.2-5-140.6c-.2-3.3-2.7-6.1-6.1-6.1zm376.7 62.8c-10.8 0-21.1 2.2-30.6 6.1-6.4-70.8-65.8-126.4-138.3-126.4-17.8 0-35 3.3-50.3 9.4-6.1 2.2-7.8 4.4-7.8 9.2v249.7c0 5 3.9 8.6 8.6 9.2h218.3c43.3 0 78.6-35 78.6-78.3.1-43.6-35.2-78.9-78.5-78.9zm-296.7-60.3c-4.2 0-7.5 3.3-7.8 7.8l-3.3 136.7 3.3 65.6c.3 4.2 3.6 7.5 7.8 7.5 4.2 0 7.5-3.3 7.5-7.5l3.9-65.6-3.9-136.7c-.3-4.5-3.3-7.8-7.5-7.8zm-53.6-7.8c-3.3 0-6.4 3.1-6.4 6.7l-3.9 145.3 3.9 66.9c.3 3.6 3.1 6.4 6.4 6.4 3.6 0 6.4-2.8 6.7-6.4l4.4-66.9-4.4-145.3c-.3-3.6-3.1-6.7-6.7-6.7zm26.7 3.4c-3.9 0-6.9 3.1-6.9 6.9L227 321.3l3.9 66.4c.3 3.9 3.1 6.9 6.9 6.9s6.9-3.1 6.9-6.9l4.2-66.4-4.2-141.7c0-3.9-3-6.9-6.9-6.9z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="feature__content--right">
+                      <h5>Audio Recorder</h5>
+                      <p>For business which a product online product listings in the</p>
+                    </div>
+                  </li>
+                  <li class="wow fadeInUp" data-wow-duration="0.7s"
+                    style="visibility: visible; animation-duration: 0.7s;">
+                    <div class="feature__content--left">
+                      <svg class="svg-inline--fa fa-bluetooth-b fa-w-10" aria-hidden="true" focusable="false"
+                        data-prefix="fab" data-icon="bluetooth-b" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 320 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                          d="M196.48 260.023l92.626-103.333L143.125 0v206.33l-86.111-86.111-31.406 31.405 108.061 108.399L25.608 368.422l31.406 31.405 86.111-86.111L145.84 512l148.552-148.644-97.912-103.333zm40.86-102.996l-49.977 49.978-.338-100.295 50.315 50.317zM187.363 313.04l49.977 49.978-50.315 50.316.338-100.294z">
+                        </path>
+                      </svg>
+                    </div>
+                    <div class="feature__content--right">
+                      <h5>Wifi Access</h5>
+                      <p>For business which a product online product listings in the</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="feature__thumb wow fadeInLeft" data-wow-duration="0.5s"
+              style="visibility: visible; animation-duration: 0.5s; animation-name: fadeInLeft;">
+              <img src="https://template.labartisan.net/demos/blackfriday/assets/images/feature/02.jpg"
+                alt="blackfriday" class="w-100">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="offer-section2 overflow-hidden position-relative" id="offer">
+    <div class="container  ani-section">
+      <div class="offer">
+        <div class="row justify-content-center row-cols-lg-2 row-cols-1 g-4 flex-row-reverse">
+          <div class="col">
+            <div class="offer__item style-2" data-wow-duration="0.5s"
+              style="visibility: visible; animation-duration: 0.5s;">
+              <div class="offer__item--thumb">
+                <img src="https://template.labartisan.net/demos/blackfriday/assets/images/offer/03.png"
+                  alt="blackfriday">
+                <div class="abs-image">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/offer/04.png"
+                    alt="blackfriday">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="offer__item style-2">
+              <div class="offer__item--content text-center">
+                <img src="https://template.labartisan.net/demos/blackfriday/assets/images/offer/02.png"
+                  alt="blackfriday" class="wow fadeInUp" data-wow-duration="0.5s"
+                  style="visibility: visible; animation-duration: 0.5s;">
+                <ul class="countdown count-down2 mt-4" data-wow-duration="0.7s" data-date="Nove 26, 2022 21:14:01"
+                  style="visibility: visible; animation-duration: 0.7s;">
+                  <li class="clock-item">
+                    <span class="count-number days2">0</span>
+                    <p class="count-text">Days</p>
+                  </li>
+
+                  <li class="clock-item">
+                    <span class="count-number hours2">0</span>
+                    <p class="count-text">Hour</p>
+                  </li>
+
+                  <li class="clock-item">
+                    <span class="count-number minutes2">0</span>
+                    <p class="count-text">Min</p>
+                  </li>
+
+                  <li class="clock-item">
+                    <span class="count-number seconds2">0</span>
+                    <p class="count-text">Sec</p>
+                  </li>
+                </ul>
+                <a href="#" class="default-btn shop-btn offer-btn"><span>Shop Now</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <section class="mt-5">
+    <div class="container  ani-section  ani-section">
+      <div class="section-header mb-5 text-center d-flex justify-content-center align-items-center"
+        data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+        <h2 class="pt-4 pe-3 fs-1" style="color: #fff;">Black Friday
+          <img src="https://template.labartisan.net/demos/blackfriday/assets/images/title-shape/deal.png"
+            alt="blackfriday" class="mt-30-none">
+          to Day
+        </h2>
+      </div>
+      <div class="section-wrapper">
+        <div class="product">
+          <div class="row row-cols-lg-4 row-cols-sm-2 row-cols-1 justify-content-center g-4">
+            <div class="col" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+              <div class="product__item text-center">
+                <div class="product__item--thumb">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/05.jpg"
+                    alt="blackfriday">
+                </div>
+                <div class="product__item--content py-4">
+                  <a href="#">
+                    <h6>Blue Smartphones </h6>
+                  </a>
+                  <h6>$380.00</h6>
+                  <div class="rating mb-4">
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                  </div>
+                  <a href="#" class="default-btn border-btn"><span>Shop Now</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="col" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+              <div class="product__item text-center">
+                <div class="product__item--thumb">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/06.jpg"
+                    alt="blackfriday">
+                </div>
+                <div class="product__item--content py-4">
+                  <a href="#">
+                    <h6>I smart watch</h6>
+                  </a>
+                  <h6>$380.00</h6>
+                  <div class="rating mb-4">
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                  </div>
+                  <a href="#" class="default-btn border-btn"><span>Shop Now</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="col" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+              <div class="product__item text-center">
+                <div class="product__item--thumb">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/07.jpg"
+                    alt="blackfriday">
+                </div>
+                <div class="product__item--content py-4">
+                  <a href="#">
+                    <h6>MI Music box</h6>
+                  </a>
+                  <h6>$380.00</h6>
+                  <div class="rating mb-4">
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                  </div>
+                  <a href="#" class="default-btn border-btn"><span>Shop Now</span></a>
+                </div>
+              </div>
+            </div>
+            <div class="col" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+              <div class="product__item text-center">
+                <div class="product__item--thumb">
+                  <img src="https://template.labartisan.net/demos/blackfriday/assets/images/product/08.jpg"
+                    alt="blackfriday">
+                </div>
+                <div class="product__item--content py-4">
+                  <a href="#">
+                    <h6>Black headphone</h6>
+                  </a>
+                  <h6>$380.00</h6>
+                  <div class="rating mb-4">
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                    <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" focusable="false" data-prefix="fas"
+                      data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                      data-fa-i2svg="">
+                      <path fill="#c62447"
+                        d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"></path>
+                    </svg>
+                  </div>
+                  <a href="#" class="default-btn border-btn"><span>Shop Now</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="video-section">
+    <div class="container  ani-section">
+      <div class="video text-center fadeInUp" data-wow-duration="0.5s"
+        style="visibility: visible; animation-duration: 0.5s; animation-name: fadeInUp;">
+        <div class="video__icon">
+          <a class="play-btn" onclick="showModal()" data-rel="lightcase" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            <svg width="16px" class="svg-inline--fa fa-play fa-w-14" aria-hidden="true" focusable="false"
+              data-prefix="fas" data-icon="play" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+              data-fa-i2svg="">
+              <path fill="#c62447"
+                d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z">
+              </path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content">
+        <div class="modal-body" id="iframeDisplay">
+          <iframe width="900" height="506" src="https://www.youtube.com/embed/Q9e79PbthO8" title="Fire In The Sky (4K)"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="faq-section padding--top padding--bottom position-relative" id="faq">
+    <div class="container  ani-section">
+      <div class="faq">
+        <div class="row">
+          <div class="col-lg-6 col-12">
+            <div class="faq__content">
+              <h3 class="mb-5" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;"><img
+                  src="https://template.labartisan.net/demos/blackfriday/assets/images/title-shape/faq.png"
+                  alt="blackfriday"> Questions</h3>
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item" data-wow-duration="0.5s" data-wow-delay="0.2s"
+                  style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.2s;">
+                  <h6 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Can I cancel or change my order?
+                    </button>
+                  </h6>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      In winter, all attractions, with the exception of selected water attractions, are opens for you.
+                      Due into the weather, however attractions may have tobe a closed at short notice.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item" data-wow-duration="0.5s" data-wow-delay="0.4s"
+                  style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.4s;">
+                  <h6 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Can guests join us later?
+                    </button>
+                  </h6>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      In winter, all attractions, with the exception of selected water attractions, are opens for you.
+                      Due into the weather, however attractions may have tobe a closed at short notice.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item" data-wow-duration="0.5s" data-wow-delay="0.6s"
+                  style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.6s;">
+                  <h6 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Where can I leave my luggage?
+                    </button>
+                  </h6>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      In winter, all attractions, with the exception of selected water attractions, are opens for you.
+                      Due into the weather, however attractions may have tobe a closed at short notice.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item" data-wow-duration="0.5s" data-wow-delay="0.8s"
+                  style="visibility: visible; animation-duration: 0.5s; animation-delay: 0.8s;">
+                  <h6 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                      How safe is it to order online?
+                    </button>
+                  </h6>
+                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      In winter, all attractions, with the exception of selected water attractions, are opens for you.
+                      Due into the weather, however attractions may have tobe a closed at short notice.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section padding--bottom padding--top" id="contact">
+    <div class="container  ani-section">
+      <div class="section-header text-center mb-5" data-wow-duration="0.4s"
+        style="visibility: visible; animation-duration: 0.4s;">
+        <h1>Contact</h1>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-5 col-12">
+          <div class="feature__content--content contact-info">
+            <h2>Contact Information</h2>
+            <ul>
+              <li class="wow fadeInUp" data-wow-duration="0.7s" style="visibility: visible; animation-duration: 0.7s;">
+                <div class="feature__content--left">
+                  <svg class="svg-inline--fa fa-map-marker-alt fa-w-12" aria-hidden="true" focusable="false"
+                    data-prefix="fas" data-icon="map-marker-alt" role="img" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 384 512" data-fa-i2svg="" width="24px">
+                    <path fill="currentColor"
+                      d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z">
+                    </path>
+                  </svg>
+                </div>
+                <div class="feature__content--right">
+                  <h5>Office address</h5>
+                  <p>Suite 1307, Level 12, Tropical Center 218 New Elephant Road, Dhaka - 1205</p>
+                </div>
+              </li>
+              <li class="wow fadeInUp" data-wow-duration="0.7s" style="visibility: visible; animation-duration: 0.7s;">
+                <div class="feature__content--left">
+                  <svg class="svg-inline--fa fa-phone-volume fa-w-12" aria-hidden="true" focusable="false"
+                    data-prefix="fas" data-icon="phone-volume" role="img" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 384 512" data-fa-i2svg="" width="24px">
+                    <path fill="currentColor"
+                      d="M97.333 506.966c-129.874-129.874-129.681-340.252 0-469.933 5.698-5.698 14.527-6.632 21.263-2.422l64.817 40.513a17.187 17.187 0 0 1 6.849 20.958l-32.408 81.021a17.188 17.188 0 0 1-17.669 10.719l-55.81-5.58c-21.051 58.261-20.612 122.471 0 179.515l55.811-5.581a17.188 17.188 0 0 1 17.669 10.719l32.408 81.022a17.188 17.188 0 0 1-6.849 20.958l-64.817 40.513a17.19 17.19 0 0 1-21.264-2.422zM247.126 95.473c11.832 20.047 11.832 45.008 0 65.055-3.95 6.693-13.108 7.959-18.718 2.581l-5.975-5.726c-3.911-3.748-4.793-9.622-2.261-14.41a32.063 32.063 0 0 0 0-29.945c-2.533-4.788-1.65-10.662 2.261-14.41l5.975-5.726c5.61-5.378 14.768-4.112 18.718 2.581zm91.787-91.187c60.14 71.604 60.092 175.882 0 247.428-4.474 5.327-12.53 5.746-17.552.933l-5.798-5.557c-4.56-4.371-4.977-11.529-.93-16.379 49.687-59.538 49.646-145.933 0-205.422-4.047-4.85-3.631-12.008.93-16.379l5.798-5.557c5.022-4.813 13.078-4.394 17.552.933zm-45.972 44.941c36.05 46.322 36.108 111.149 0 157.546-4.39 5.641-12.697 6.251-17.856 1.304l-5.818-5.579c-4.4-4.219-4.998-11.095-1.285-15.931 26.536-34.564 26.534-82.572 0-117.134-3.713-4.836-3.115-11.711 1.285-15.931l5.818-5.579c5.159-4.947 13.466-4.337 17.856 1.304z">
+                    </path>
+                  </svg>
+                </div>
+                <div class="feature__content--right">
+                  <h5>Phone number</h5>
+                  <p>+8801678170593, 01919-264687 02-9611936</p>
+                </div>
+              </li>
+              <li class="wow fadeInUp" data-wow-duration="0.7s" style="visibility: visible; animation-duration: 0.7s;">
+                <div class="feature__content--left">
+                  <svg class="svg-inline--fa fa-envelope-open-text fa-w-16" aria-hidden="true" focusable="false"
+                    data-prefix="fas" data-icon="envelope-open-text" role="img" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512" data-fa-i2svg="" width="24px">
+                    <path fill="currentColor"
+                      d="M176 216h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v16c0 8.84 7.16 16 16 16zm-16 80c0 8.84 7.16 16 16 16h160c8.84 0 16-7.16 16-16v-16c0-8.84-7.16-16-16-16H176c-8.84 0-16 7.16-16 16v16zm96 121.13c-16.42 0-32.84-5.06-46.86-15.19L0 250.86V464c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V250.86L302.86 401.94c-14.02 10.12-30.44 15.19-46.86 15.19zm237.61-254.18c-8.85-6.94-17.24-13.47-29.61-22.81V96c0-26.51-21.49-48-48-48h-77.55c-3.04-2.2-5.87-4.26-9.04-6.56C312.6 29.17 279.2-.35 256 0c-23.2-.35-56.59 29.17-73.41 41.44-3.17 2.3-6 4.36-9.04 6.56H96c-26.51 0-48 21.49-48 48v44.14c-12.37 9.33-20.76 15.87-29.61 22.81A47.995 47.995 0 0 0 0 200.72v10.65l96 69.35V96h320v184.72l96-69.35v-10.65c0-14.74-6.78-28.67-18.39-37.77z">
+                    </path>
+                  </svg>
+                </div>
+                <div class="feature__content--right">
+                  <h5>Email address</h5>
+                  <p>support@yourmailname.com</p>
+                  <p>support@yourmailname.com</p>
+                </div>
+              </li>
+              <li class="wow fadeInUp" data-wow-duration="0.7s" style="visibility: visible; animation-duration: 0.7s;">
+                <div class="feature__content--left">
+                  <svg class="svg-inline--fa fa-globe fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas"
+                    data-icon="globe" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"
+                    data-fa-i2svg="" width="24px">
+                    <path fill="currentColor"
+                      d="M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4-73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z">
+                    </path>
+                  </svg>
+                </div>
+                <div class="feature__content--right">
+                  <h5>Website address</h5>
+                  <p>http://yoursitename.com</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-7 col-12">
+          <div class="contact__form" data-wow-duration="0.5s" style="visibility: visible; animation-duration: 0.5s;">
+            <h4 class="mb-4">Send us a Message</h4>
+            <form class="d-flex flex-wrap justify-content-between" action="contact.php" id="contact-form" method="POST">
+              <input type="text" placeholder="Your Name" id="name" name="name" required="required">
+              <input type="text" placeholder="Your Email" id="email" name="email" required="">
+              <input class="w-100" type="text" placeholder="Subject" id="subject" name="subject" required="">
+              <textarea placeholder="Your Message" rows="8" name="message" id="message" required=""></textarea>
+            </form>
+            <button type="submit" class="default-btn shop-btn"><span>submit message</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+  </section>
 
   <footer>
     <div class="container">
